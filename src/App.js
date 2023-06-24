@@ -11,10 +11,12 @@ function App() {
     return (
     <div className="App">
       <Card title="WFS Multiselect" style={{ width: 300 }}>
-        <WfsSelect />
+        <WfsSelect wfs_endpoint="https://www.geo2france.fr/geoserver/spld/ows" search_field='nom' layername = 'spld:communes' />
+        
+        <WfsSelect wfs_endpoint="https://www.geo2france.fr/geoserver/odema/ows" search_field='nom' value_field='siret' layername = 'odema:trackdechets_etablissements' />
       </Card>
       <Card title="Date Range" style={{ width: 300 }}>
-        <WfsDateRange />
+        <WfsDateRange wfs_endpoint = "https://www.geo2france.fr/geoserver/odema/ows" layername = 'odema:trackdechets_etablissements' time_field = 'date_inscription'/>
       </Card>
     </div>
     
