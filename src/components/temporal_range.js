@@ -19,7 +19,7 @@ function WfsDateRange(){
     const [nfeatures, setNFeatures] = useState(null);
 
     const changed = (date, datestring) => {
-        //utiliser l'objet dayjs
+        //utiliser l'objet dayjs + traiter les cas où l'input n'est pas saisie ( ["",""] )
         console.log(date);
         fetchData(datestring[0],datestring[1]).then(data => setNFeatures(data.totalFeatures));
     

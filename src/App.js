@@ -4,16 +4,18 @@ import WfsSelect from './components/multi-select';
 import WfsDateRange from './components/temporal_range';
 
 import React from 'react'
-
+import { Card } from 'antd';
 
 
 function App() {
     return (
     <div className="App">
-        <p>Voici mon composant</p>
+      <Card title="WFS Multiselect" style={{ width: 300 }}>
         <WfsSelect />
-        <p> Time picker </p>
+      </Card>
+      <Card title="Date Range" style={{ width: 300 }}>
         <WfsDateRange />
+      </Card>
     </div>
     
     
