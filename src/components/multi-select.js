@@ -12,11 +12,13 @@
 import AsyncSelect from 'react-select/async';
 
 
-function WfsSelect({layername, wfs_endpoint, search_field = 'label', value_field = 'code'} ){
+function WfsSelect({key, layername, wfs_endpoint, search_field = 'label', value_field = 'code'} ){
 
       const getOptions = (filterText)=>{
         return new Promise((resolve, reject)=> {
-            fetch(`${wfs_endpoint}?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=${layername}&OUTPUTFORMAT=application%2Fjson&&srsName=EPSG:4326&CQL_FILTER=${search_field}%20ilike%20%27${filterText}%25%27`).then( response => {
+            const cql_filter = `${search_field}%20ilike%20%27${filterText}%25%27`
+            //setCql_filter(key, cql_filter)
+            fetch(`${wfs_endpoint}?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=${layername}&OUTPUTFORMAT=application%2Fjson&&srsName=EPSG:4326&CQL_FILTER=${cql_filter}`).then( response => {
                 return response.json();
                 }
             ).then(data => {

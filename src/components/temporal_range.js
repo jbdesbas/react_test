@@ -10,6 +10,9 @@
  
 import React, { useState } from 'react';
 import { DatePicker, Space } from 'antd';
+
+import { v4 as uuid } from 'uuid';
+
 const { RangePicker } = DatePicker;
 
 
@@ -19,11 +22,15 @@ Voir avec day.js dayjs().endOf('month')
 
 TODO compatiable avec la dimension T des WFS (&TIME=)
 */
-function WfsDateRange({layername, wfs_endpoint, time_field}){
+
+
+const id = uuid()
+function WfsDateRange({layername, wfs_endpoint, time_field, setCql_filter}){
 
     const base_url = `${wfs_endpoint}?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=${layername}&OUTPUTFORMAT=application%2Fjson`
     const [nfeatures, setNFeatures] = useState(null);
-
+    //let cql_filter = null;
+    
     const changed = (date, datestring) => {
         //utiliser l'objet dayjs + traiter les cas où l'input n'est pas saisie ( ["",""] )
         console.log(date);
@@ -33,7 +40,9 @@ function WfsDateRange({layername, wfs_endpoint, time_field}){
 
     const fetchData = (date_start,date_stop) => {
         return new Promise((resolve, reject)=> {
-            fetch(`${base_url}&CQL_FILTER=${time_field}>=${date_start}-01 and ${time_field}<=${date_stop}-01`).then(
+            const cql_filter = `${time_field}>=${date_start}-01 and ${time_field}<=${date_stop}-01`
+            setCql_filter(id, cql_filter);
+            fetch(`${base_url}&CQL_FILTER=${cql_filter}`).then(
                 response => {
                     resolve(response.json())
                 }
