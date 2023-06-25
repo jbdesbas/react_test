@@ -13,7 +13,6 @@ import AsyncSelect from 'react-select/async';
 
 
 function WfsSelect({key, layername, wfs_endpoint, search_field = 'label', value_field = 'code'} ){
-
       const getOptions = (filterText)=>{
         return new Promise((resolve, reject)=> {
             const cql_filter = `${search_field}%20ilike%20%27${filterText}%25%27`
@@ -31,7 +30,8 @@ function WfsSelect({key, layername, wfs_endpoint, search_field = 'label', value_
               });
         })
       }
-    
+      //TODO : retourner un filtre CQL avec les valeurs sélectionnées
+      //TODO : ajouter les filtres CQL du parent à la recherche
       return (
         <AsyncSelect loadOptions={getOptions} />
   );

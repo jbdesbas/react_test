@@ -28,36 +28,16 @@ const id = uuid()
 function WfsDateRange({layername, wfs_endpoint, time_field, setCql_filter}){
 
     const base_url = `${wfs_endpoint}?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=${layername}&OUTPUTFORMAT=application%2Fjson`
-    const [nfeatures, setNFeatures] = useState(null);
-    //let cql_filter = null;
     
     const changed = (date, datestring) => {
         //utiliser l'objet dayjs + traiter les cas où l'input n'est pas saisie ( ["",""] )
-        console.log(date);
-        fetchData(datestring[0],datestring[1]).then(data => setNFeatures(data.totalFeatures));
-    
+        setCql_filter(id, `${time_field}>=${datestring[0]}-01 and ${time_field}<=${datestring[1]}-01`);
     }
 
-    const fetchData = (date_start,date_stop) => {
-        return new Promise((resolve, reject)=> {
-            const cql_filter = `${time_field}>=${date_start}-01 and ${time_field}<=${date_stop}-01`
-            setCql_filter(id, cql_filter);
-            fetch(`${base_url}&CQL_FILTER=${cql_filter}`).then(
-                response => {
-                    resolve(response.json())
-                }
-            ).catch(error => {
-                console.log(error);
-                reject(error);
-            });
-        });
-    
-    }
 
     return (
             <>
             <RangePicker picker="month" onChange={changed} />
-            <p>Features : {nfeatures}</p>
             </>
     )
 }
