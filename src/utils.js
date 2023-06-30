@@ -1,4 +1,4 @@
-function queryWFS(url, layername, options = {}) {
+export function queryWFS(url, layername, options = {}) {
   const encodedLayername = encodeURIComponent(layername);
   const baseUrl = `${url}?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=${encodedLayername}&OUTPUTFORMAT=application%2Fjson&srsName=EPSG:4326`;
 
@@ -31,4 +31,4 @@ function queryWFS(url, layername, options = {}) {
   });
 };
 
-export default queryWFS;
+

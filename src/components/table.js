@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Space } from 'antd';
-import queryWFS from '../utils';
+import {queryWFS} from '../utils';
 
 //Affiche un tableau avec les données du WFS, en appliquant cqlFilter
 // TODO : dynamiser les colonnes, gérer la pagination

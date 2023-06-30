@@ -10,7 +10,7 @@
  */
  
 import AsyncSelect from 'react-select/async';
-import queryWFS from '../utils';
+import {queryWFS} from '../utils';
 
 function WfsSelect({key, layername, wfs_endpoint, search_field = 'label', value_field = 'code'} ){
       const getOptions = (filterText)=>{
