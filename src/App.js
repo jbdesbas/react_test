@@ -2,6 +2,7 @@ import './App.css';
 import WfsSelect from './components/multi-select';
 import WfsDateRange from './components/temporal_range';
 import WfsControl from './components/wfs-control';
+import WfsTable from './components/table';
 
 import React, { useState } from 'react';
 import { Card } from 'antd';
@@ -69,6 +70,8 @@ function App() {
         <br/>
         Nfeatures = {nFeature}
     </WfsControl>
+    
+    <WfsTable wfs_endpoint={wfs_endpoint} layername = {layername} cqlFilter = {formatedCql(cql_filter)}/>
     </div>  
     )
 }
